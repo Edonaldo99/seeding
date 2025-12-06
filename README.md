@@ -1,120 +1,130 @@
-# Apple Music Case Study
-**Universidad Da Vinci de Guatemala** **Curso:** Desarrollo Web / Bases de Datos II  
-**Catedrático:** Ing. Brandon Chitay
+# Apple Music – Caso de Arquitectura de Datos
+Proyecto desarrollado como parte del entregable de Consultoría de Arquitectura de Datos, aplicando conceptos de modelamiento documental, seeding de datos, consultas agregadas y diseño de API orientada a dashboard.
+
+La idea del proyecto es simular un escenario realista de analytics para Apple Music: usuarios, artistas, canciones y reproducciones, con consultas que permiten analizar regalías, comportamiento de usuarios y tendencias regionales.
 
 ---
 
-## 🎯 Objetivo
-Este repositorio contiene el **Kit de Inicio (Starter Kit)**. Su misión es actuar como arquitectos de datos para diseñar la infraestructura, persistencia y API de la nueva plataforma de analíticas de Apple Music.
+## 🎯 Objetivo del Proyecto
+El objetivo fue implementar una propuesta completa de arquitectura de datos en MongoDB, capaz de responder cinco consultas analíticas clave, diseñar un dashboard visual que muestre los resultados y documentar los contratos de API necesarios para exponer la información a interfaces externas.
 
-El script incluido (`seed.js`) generará **miles de registros simulados** (Usuarios, Canciones, Artistas y Streams) para que puedan probar sus consultas en un entorno realista.
+Este proyecto incluye:
+
+- Modelamiento documental en MongoDB
+- Población automática de datos con Node.js (seeding script)
+- Consultas de analítica usando Aggregation Pipelines
+- Prototipo de dashboard en v0.dev
+- Diseño de 5 endpoints JSON (API Contract)
+- Documentación completa para entrega
 
 ---
 
-## 🚀 Instrucciones de Inicio (Setup)
+## Arquitectura Técnica
+La solución se compone de cuatro partes principales:
 
-Sigue estos pasos estrictamente para configurar tu entorno de examen.
+1. **Base de Datos**
+   - MongoDB ejecutado en contenedor Docker
+   - Modelo de datos documental orientado a analítica (modelo estrella)
+   - Colecciones:
+     - `users`
+     - `artists`
+     - `songs`
+     - `streams`
 
-### 1. Preparar el Repositorio
-Este repositorio es la base de tu entrega. No lo clones directamente, primero haz tu propia copia:
+2. **Seeding**
+   - Script en Node.js que genera:
+     - 100 usuarios (incluye usuarios “zombis” sin actividad)
+     - 50 canciones
+     - 5000+ reproducciones simuladas
+   - Datos realistas por región y género musical
 
-1.  Da clic en el botón **Fork** (arriba a la derecha de esta página) para crear una copia en tu cuenta de GitHub.
-2.  Clona **tu nuevo repositorio** (el que está en tu perfil) a tu máquina local:
-    ```bash
-    git clone [https://github.com/TU_USUARIO/seeding.git](https://github.com/TU_USUARIO/seeding.git)
-    cd seeding
-    ```
+3. **Consultas (Analytics)**
+   - 5 consultas agregadas para análisis:
+     1. Regalías por artista (30 días)
+     2. Top 10 canciones por región (7 días)
+     3. Usuarios premium sin streams
+     4. Demografía de Reggaeton
+     5. Fans intensivos de Bad Bunny
 
-### 2. Instalar Dependencias del Seeder
-El script de generación de datos utiliza Node.js. Instala las librerías necesarias:
-```bash
-npm install
-````
+4. **Dashboard Prototipo**
+   - Diseñado en v0.dev
+   - Representa gráficamente los resultados
+   - Vista amigable para análisis
 
-### 3\. Levantar Infraestructura (Docker)
+5. **Diseño de API**
+   - 5 endpoints documentados
+   - Especificación en `/api-design/api-spec.md`
+   - Respuestas en JSON
+   - Capturas limpias exportadas con Carbon
 
-Antes de generar los datos, necesitas una base de datos corriendo.
+---
 
-  * Crea tu archivo `docker-compose.yml` (ver sección de Entregables abajo).
-  * Levanta el servicio:
-    ```bash
-    docker-compose up -d
-    ```
-  * **Importante:** Asegúrate de que MongoDB esté expuesto en el puerto `27017`.
+## 🗂 Estructura del Repositorio
 
-### 4\. Poblar la Base de Datos (Seeding)
-
-Una vez que Mongo esté corriendo, ejecuta el script mágico para llenar la DB con data de prueba:
-
-```bash
-npm start
-```
-
-*Si ves el mensaje "✅ EXITO: Base de datos poblada", estás listo para empezar.*
-
------
-
-## 📂 Estructura de Entrega (Requerido)
-
-Para mantener el orden, debes crear las siguientes carpetas en este repositorio y colocar tus archivos donde corresponde. **El desorden será penalizado.**
-
-```text
 /
 ├── api-design/
-│   └── api-spec.md         # Documentación de los 5 Endpoints (Request/Response)
+│ └── api-spec.md
 ├── database/
-│   ├── docker-compose.yml  # Tu configuración de Docker
-│   ├── queries.js          # Tus 5 Agregaciones (Aggregation Pipelines)
-│   └── schema-diagram.pdf  # Imagen o PDF de tu diseño de esquema
+│ ├── docker-compose.yml
+│ ├── queries.js
+│ └── schema-diagram.pdf
 ├── dashboard-v0/
-│   ├── screenshots/        # Capturas del dashboard generado en v0
-│   └── prompt.txt          # El prompt que usaste para generar la UI
-├── seed.js                 # (Ya incluido)
-├── package.json            # (Ya incluido)
-└── README.md               # (Este archivo)
-```
+│ ├── screenshots/
+│ └── prompt.txt
+├── seed.js
+├── package.json
+└── README.md
 
------
 
-## 📝 Lista de Tareas (Checklist)
+---
 
-Para ganar los 100 puntos, asegúrate de completar:
+## Tecnologías Utilizadas
 
-  - [ ] **Infraestructura:** Docker corre correctamente y tiene persistencia de datos (Volumes).
-  - [ ] **Datos:** El script `npm start` corre sin errores y genera usuarios "Zombis" y datos de Guatemala.
-  - [ ] **Consultas:** El archivo `database/queries.js` contiene las 5 agregaciones solicitadas en el enunciado
-  - [ ] **API:** El diseño de los endpoints en `api-design/` coincide lógicamente con lo que muestra el Dashboard.
-  - [ ] **Visualización:** Las capturas en `dashboard-v0/` muestran una interfaz coherente con los datos.
-  - [ ] **Video:** Has subido tu video explicativo (link en la entrega del portal o en este README al final).
+Docker
 
------
+MongoDB
 
-## ⚠️ Solución de Problemas (Troubleshooting)
+Mongo Express
 
-**Error: "connect ECONNREFUSED 127.0.0.1:27017"**
+Node.js
 
-  * **Causa:** Tu contenedor de Docker no está corriendo o no mapeaste el puerto.
-  * **Solución:** Revisa tu `docker-compose.yml` y asegúrate de tener `ports: - "27017:27017"`.
+Aggregation Pipeline
 
-**Error: "Cannot find module..."**
+Faker.js
 
-  * **Causa:** No instalaste las librerías.
-  * **Solución:** Ejecuta `npm install` en la raíz del proyecto.
+v0.dev (UI generada con IA)
 
------
+Carbon (capturas limpias de JSON)
 
-### 📅 Fecha Límite: 06 de Diciembre
+Markdown
 
-¡Éxito, Ingenieros\! 🍏🎵
+## Video de Presentación
 
-```
+El video de presentación explica:
 
-***
+Diseño del modelo
 
-### ¿Por qué funciona este README?
+Simulación de datos
 
-1.  **Reduce la fricción cognitiva:** Les dice exactamente qué comando ejecutar (`npm install`, `npm start`).
-2.  **Estandariza la entrega:** La sección "Estructura de Entrega" te salvará horas de calificación. Ya no tendrás que buscar dónde puso cada alumno el `docker-compose`.
-3.  **Checklist:** Les da seguridad psicológica de que "ya terminaron" si marcaron todas las casillas.
-4.  **Troubleshooting:** Previene que te escriban correos preguntando por errores básicos de conexión a Mongo.
-```
+Queries analíticos
+
+Dashboard final
+
+Contrato del API
+
+(Agregar el enlace cuando esté disponible)
+
+## Conclusiones Finales
+
+La arquitectura documental implementada permite analizar patrones de uso de Apple Music de manera eficiente y sin joins complejos. El modelo utiliza referencias extendidas como el nombre del artista dentro de songs, lo que facilita consultas rápidas para dashboards.
+
+El seed genera datos realistas con distribución demográfica, hábitos de escucha, usuarios inactivos, y tendencias regionales. Así fue posible obtener métricas como “Top artistas por regalías”, “Top GT”, o “heavy listeners”.
+
+El dashboard muestra cómo una empresa podría visualizar insights clave para toma de decisiones y cómo estos datos pueden ser consumidos por interfaces externas mediante un contrato de API documentado.
+
+Este ejercicio demuestra el uso práctico de bases documentales, pipelines de agregación y visualización de insights desde datos simulados hacia un prototipo real de producto.
+
+## Autor
+
+Elder Donaldo Salazar Garrido
+Estudiante de Ingeniería en Sistemas.

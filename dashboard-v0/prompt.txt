@@ -1,0 +1,36 @@
+## 7. Ejemplo de Prompt completo
+
+Create a modern admin dashboard called "Apple Music Admin".
+Use a dark Apple Music style. San Francisco font. Rounded components.
+
+Divide the screen into five visual sections:
+
+1. Card: "Top Artists - Last 30 days"
+   Use a horizontal bar chart.
+   Example data:
+   Bad Bunny: 185k seconds
+   Ricardo Arjona: 86k seconds
+   Taylor Swift: 77k seconds
+   Feid: 76k seconds
+   Metallica: 74k seconds
+
+2. Card: "Top 10 Songs Guatemala - Last 7 days"
+   Use a table:
+   Columns: Title, Artist, Plays, Listeners
+
+3. Card: "Premium Zombies - Last 30 days"
+   Use a big KPI element:
+   "16 Premium Zombies"
+   Then a small table: Username, Country, Email
+
+4. Card: "Reggaeton Demographics"
+   Use a bar chart with age ranges:
+   15: 13
+   20: 22
+   30: 19
+   40: 22
+   50: 4
+
+5. Card: "Heavy Users - Bad Bunny"
+   Use a table:
+   Username | Country | Subscription | Distinct Songs
